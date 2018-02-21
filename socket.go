@@ -28,16 +28,16 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 	// Send to client
 	for {
 		// Wait a Second
-		time.Sleep(time.Second)
+		time.Sleep(time.Millisecond)
 		// Get Time
-		current_time := getTime()
+		current_time := getTime().Format("Mon Jan _2 15:04:05 2006")
+
 		// Send as JSON
 		json, err := json.Marshal(current_time)
 		if err != nil {
 			log.Println(err)
 			}
 		err = ws.WriteMessage(websocket.TextMessage, json)
-		log.Println("Sending time to the client!")
 		if err != nil {
 			log.Println(err)
 			}

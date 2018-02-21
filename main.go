@@ -15,6 +15,10 @@ func main() {
 	t := http.StripPrefix("/templates/", http.FileServer(http.Dir("templates")))
 	r.PathPrefix("/templates/").Handler(t)
 
+	// Static
+	s := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
+	r.PathPrefix("/static/").Handler(s)
+
 	r.HandleFunc("/", pageHandler)
 	r.HandleFunc("/ws", wsHandler)
 

@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head></head>
+<head>
+
+<!-- css -->
+<link rel="stylesheet" href="/static/css/theme.css">
+
+</head>
 
 <body>
 
@@ -13,8 +18,9 @@
         var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
         ws.onmessage = function (evt) {
-           var myTextArea = document.getElementById("ta");
-           ta.value = evt.data
+           var ta = document.getElementById("ta");
+           var ti = evt.data.replace(/['"]+/g, '');
+           ta.value = ti
         };
       }
     </script>
