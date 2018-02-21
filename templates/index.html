@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-</head>
+<head></head>
 
 <body>
 
     <title>Alarm/Timer</title>
-    <p>Here is some content</p>
+
+    <script type="text/javascript">
+     function wsInit() {
+
+        var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+        ws.onmessage = function (evt) {
+           var myTextArea = document.getElementById("ta");
+           ta.value = evt.data
+        };
+      }
+    </script>
+
+    <script type="text/javascript">
+        wsInit()
+    </script>
+
+    <textarea id="ta"></textarea>
 
 </body>
 
