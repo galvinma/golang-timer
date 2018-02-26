@@ -4,7 +4,13 @@
 <head>
 
 <!-- css -->
+<link rel="stylesheet" href="/static/css/jquery.timepicker.css">
 <link rel="stylesheet" href="/static/css/theme.css">
+
+<!-- js -->
+<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.timepicker.js"></script>
+<script type="text/javascript" src="/static/js/theme.js"></script>
 
 </head>
 
@@ -18,19 +24,52 @@
         var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
         ws.onmessage = function (evt) {
-           var ta = document.getElementById("ta");
-           var ti = evt.data.replace(/['"]+/g, '');
-           ta.value = ti
+          console.log(evt.data);
+          if(evt.data != "alarm") {
+             var ta = document.getElementById("ta");
+             var ti = evt.data.replace(/['"]+/g, '');
+             ta.value = ti
+           }
+          if(evt.data == "alarm") {
+             playTone()
+           }
         };
+
       }
     </script>
+
+    <script type="text/javascript">
+    function alarmSub() {
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+      ws.onopen = function() {
+        var input = document.getElementById("alarm-value");
+        ws.send(input.value);
+        };
+      };
+    </script>
+
 
     <script type="text/javascript">
         wsInit()
     </script>
     <div class="time-container">
-      <textarea id="ta"></textarea>
+      <textarea readonly="readonly" unselectable="on" id="ta"></textarea>
     </div>
+
+    <div class="alarm">
+      <input type="text" id="alarm-value" name="timepicker" class="timepicker"/>
+      <input type="button" value="Set Alarm" onclick="alarmSub()" class="alarmsubmit">
+    </div>
+
+    <script>
+    $('.timepicker').timepicker({
+        timeFormat: 'HH:mm:ss',
+        defaultTime: 'now',
+        dynamic: false,
+        dropdown: false,
+        scrollbar: false
+    });
+    </script>
 
 </body>
 

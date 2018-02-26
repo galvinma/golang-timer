@@ -1,6 +1,7 @@
 /* GENERAL */
 html {
     height: 100%;
+    box-sizing: border-box;
 }
 body{
     padding-top: 100px;
@@ -11,8 +12,13 @@ textarea{
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    user-select: none;
+    outline: none;
 }
-
+input {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
 #ta {
     border-style: none;
     resize: none;
@@ -25,4 +31,31 @@ textarea{
     align-items: center;
     display: flex;
 
+}
+.alarm{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.timepicker, .alarmsubmit{
+    align-items: center;
+    display: block;
+    text-align: center;
+}
+.timepicker {
+    width: 100px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.alarmsubmit {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius:2px;
+    cursor: pointer;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    width: auto;
 }
