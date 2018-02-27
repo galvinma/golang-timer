@@ -32,7 +32,7 @@ func sendData(ws *websocket.Conn, m *sync.Mutex, t []byte) {
 func clientSend(ws *websocket.Conn, m *sync.Mutex) {
 	for {
 		// Wait a Second
-		time.Sleep(1000 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 		current_time := getTime().Format("15:04:05")
 		sendData(ws, m, []byte(current_time))
 	}

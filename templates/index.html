@@ -45,6 +45,13 @@
         var input = document.getElementById("alarm-value");
         ws.send(input.value);
         };
+
+      ws.onmessage = function (evt) {
+        console.log(evt.data);
+        if(evt.data == "alarm") {
+           playTone()
+         }
+      };
       };
     </script>
 
