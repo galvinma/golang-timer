@@ -4,19 +4,22 @@
 <head>
 
 <!-- css -->
-<link rel="stylesheet" href="/static/css/jquery.timepicker.css">
 <link rel="stylesheet" href="/static/css/theme.css">
 
 <!-- js -->
 <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery.timepicker.js"></script>
 <script type="text/javascript" src="/static/js/theme.js"></script>
 
 </head>
 
 <body>
 
-    <title>Alarm/Timer</title>
+    <title>Pomodoro Timer</title>
+
+
+    <div class="title-container">
+      <p>Pomodoro Timer</p>
+    </div>
 
     <script type="text/javascript">
      function wsInit() {
@@ -64,20 +67,22 @@
     </div>
 
     <div class="alarm">
-      <input type="text" id="alarm-value" name="timepicker" class="timepicker"/>
-      <input type="button" value="Set Alarm" onclick="alarmSub()" class="alarmsubmit">
+      <input type="button" value="Set Timer" onclick="alarmSub()" class="alarmsubmit">
     </div>
-
-    <script>
-    $('.timepicker').timepicker({
-        timeFormat: 'HH:mm:ss',
-        defaultTime: 'now',
-        dynamic: false,
-        dropdown: false,
-        scrollbar: false
-    });
-    </script>
-
+    <br>
+    <br>
+    <br>
+    <div class="text-container">
+      <div id="instructions">
+        <p>1. Set the timer.</p>
+        <p>2. Work on a task.</p>
+        <p>3. Take a short break.</p>
+        <p>4. Repeat</p>
+        <br>
+        <p>After several sessions take a longer break.</p>
+      </div>
+    </div>
+    <br>
 </body>
 
 </html>
