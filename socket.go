@@ -19,6 +19,8 @@ var alarmtrigger bool
 var alarmstop bool
 var countdown bool
 var pomo_duration = 1500
+// var short_break_duration = 300
+// var long_break_duration = 1500
 
 // Upgrade to Websocket
 var upgrade = websocket.Upgrader{}
@@ -129,8 +131,8 @@ func serverRecieve(ws *websocket.Conn, m *sync.Mutex) {
 		}
 		if string(alarm) == "reset-timer" {
 				alarmstop = true
-				time.Sleep(100 * time.Millisecond)
-				launchSend(ws, m)
+				// time.Sleep(100 * time.Millisecond)
+				// launchSend(ws, m)
 		}
 	}
 }

@@ -34,14 +34,6 @@ input {
     height:auto;
     display:inline-block;
 }
-/* #instructions{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    user-select: none;
-    outline: none;
-} */
 .time-container{
     align-items: center;
     justify-content: center;
@@ -74,7 +66,7 @@ input {
     justify-content: center;
 }
 
-.alarmsubmit {
+#start, #stop, #reset {
     align-items: center;
     display: block;
     text-align: center;
@@ -89,4 +81,10 @@ input {
     text-decoration: none;
     vertical-align: top;
     width: auto;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }

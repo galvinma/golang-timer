@@ -34,12 +34,14 @@
              ta.value = ti
            }
          };
-        }
-
+      }
     </script>
 
     <script type="text/javascript">
     function alarmSub() {
+      $('#start').addClass("disabled")
+      $('#stop').removeClass("disabled")
+
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
       ws.onopen = function() {
@@ -65,6 +67,9 @@
 
     <script type="text/javascript">
     function alarmStop() {
+      $('#start').removeClass("disabled")
+      $('#reset').removeClass("disabled")
+      $('#stop').addClass("disabled")
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
       ws.onopen = function() {
@@ -76,13 +81,25 @@
 
     <script type="text/javascript">
     function alarmReset() {
+      $('#reset').addClass("disabled")
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
       ws.onopen = function() {
         var v = "reset-timer"
         ws.send(v);
-        };
       };
+
+      var ta = document.getElementById("ta");
+      var ti = "25:00";
+      ta.value = ti;
+      };
+    </script>
+
+    <script>
+     $(document).ready(function() {
+        $('#stop').addClass("disabled")
+        $('#reset').addClass("disabled")
+      });
     </script>
 
 
@@ -95,11 +112,11 @@
     </div>
 
     <div class="alarm">
-      <input type="button" value="Start" onclick="alarmSub()" class="alarmsubmit">
+      <input type="button" value="Start" onclick="alarmSub()" id="start">
       <div class="space"></div>
-      <input type="button" value="Stop" onclick="alarmStop()" class="alarmsubmit">
+      <input type="button" value="Stop" onclick="alarmStop()" id="stop">
       <div class="space"></div>
-      <input type="button" value="Reset" onclick="alarmReset()" class="alarmsubmit">
+      <input type="button" value="Reset" onclick="alarmReset()" id="reset">
     </div>
 
 </body>
