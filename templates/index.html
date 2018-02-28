@@ -14,7 +14,7 @@
 
 <body>
 
-    <title>Pomodoro Timer</title>
+    <title>pomotime</title>
 
 
     <div class="title-container">
@@ -63,6 +63,28 @@
       };
     </script>
 
+    <script type="text/javascript">
+    function alarmStop() {
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+      ws.onopen = function() {
+        var v = "stop-timer"
+        ws.send(v);
+        };
+      };
+    </script>
+
+    <script type="text/javascript">
+    function alarmReset() {
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+      ws.onopen = function() {
+        var v = "reset-timer"
+        ws.send(v);
+        };
+      };
+    </script>
+
 
     <script type="text/javascript">
         wsInit()
@@ -73,22 +95,13 @@
     </div>
 
     <div class="alarm">
-      <input type="button" value="Set Timer" onclick="alarmSub()" class="alarmsubmit">
+      <input type="button" value="Start" onclick="alarmSub()" class="alarmsubmit">
+      <div class="space"></div>
+      <input type="button" value="Stop" onclick="alarmStop()" class="alarmsubmit">
+      <div class="space"></div>
+      <input type="button" value="Reset" onclick="alarmReset()" class="alarmsubmit">
     </div>
-    <br>
-    <br>
-    <br>
-    <!-- <div class="text-container">
-      <div id="instructions">
-        <p>1. Set the timer.</p>
-        <p>2. Work on a task.</p>
-        <p>3. Take a short break.</p>
-        <p>4. Repeat.</p>
-        <br>
-        <p>After several sessions take a longer break.</p>
-      </div>
-    </div> -->
-    <br>
+
 </body>
 
 </html>

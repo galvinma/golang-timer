@@ -4,7 +4,6 @@ html {
     box-sizing: border-box;
 }
 body{
-    padding-top: 100px;
     padding-bottom: 100px;
 
     font-family: 'Roboto', sans-serif;
@@ -27,18 +26,22 @@ input {
     resize: none;
 
     font-family: 'Roboto', sans-serif;
-    font-size: 42px;
+    font-size: 48px;
     max-width: 80%
 }
-
-#instructions{
+.space {
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+/* #instructions{
     display: block;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
     user-select: none;
     outline: none;
-}
+} */
 .time-container{
     align-items: center;
     justify-content: center;
@@ -70,17 +73,11 @@ input {
     display: flex;
     justify-content: center;
 }
-.timepicker, .alarmsubmit{
+
+.alarmsubmit {
     align-items: center;
     display: block;
     text-align: center;
-}
-.timepicker {
-    width: 100px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.alarmsubmit {
     background-color: #000000;
     color: #FFFFFF;
     border: 1px solid #000000;
