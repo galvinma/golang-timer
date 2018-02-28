@@ -33,28 +33,33 @@
              var ti = evt.data.replace(/['"]+/g, '');
              ta.value = ti
            }
-          if(evt.data == "alarm") {
-             playTone()
-           }
-        };
+         };
+        }
 
-      }
     </script>
 
     <script type="text/javascript">
     function alarmSub() {
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
       ws.onopen = function() {
-        var input = document.getElementById("alarm-value");
-        ws.send(input.value);
+        var v = "start-timer"
+        ws.send(v);
         };
 
       ws.onmessage = function (evt) {
         console.log(evt.data);
+
+        if(evt.data != "alarm") {
+           var ta = document.getElementById("ta");
+           var ti = evt.data.replace(/['"]+/g, '');
+           ta.value = ti
+         }
+
         if(evt.data == "alarm") {
            playTone()
          }
-      };
+       };
       };
     </script>
 
@@ -62,6 +67,7 @@
     <script type="text/javascript">
         wsInit()
     </script>
+
     <div class="time-container">
       <textarea readonly="readonly" unselectable="on" id="ta"></textarea>
     </div>
@@ -72,16 +78,16 @@
     <br>
     <br>
     <br>
-    <div class="text-container">
+    <!-- <div class="text-container">
       <div id="instructions">
         <p>1. Set the timer.</p>
         <p>2. Work on a task.</p>
         <p>3. Take a short break.</p>
-        <p>4. Repeat</p>
+        <p>4. Repeat.</p>
         <br>
         <p>After several sessions take a longer break.</p>
       </div>
-    </div>
+    </div> -->
     <br>
 </body>
 
