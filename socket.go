@@ -73,7 +73,6 @@ func clientSend(ws *websocket.Conn, m *sync.Mutex) {
 				alarmtrigger = true
 			}
 			formatted := timeLeft(seconds_left)
-			log.Println(formatted)
 			if countdown == true {
 				sendData(ws, m, []byte(formatted))
 			}	else {
