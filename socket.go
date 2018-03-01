@@ -119,7 +119,7 @@ func serverRecieve(ws *websocket.Conn, m *sync.Mutex) {
 			return
 		}
 		if string(alarm) == "start-timer" {
-				pomo_duration = 1500
+				// pomo_duration = 1500
 				pomo_dtime := time.Duration(pomo_duration) * time.Second
 				timer := time.NewTimer(pomo_dtime)
 				log.Println("Starting timer")
@@ -147,6 +147,15 @@ func serverRecieve(ws *websocket.Conn, m *sync.Mutex) {
 		}
 		if string(alarm) == "reset-timer" {
 				alarmstop = true
+		}
+		if string(alarm) == "25" {
+				pomo_duration = 1500
+		}
+		if string(alarm) == "10" {
+				pomo_duration = 600
+		}
+		if string(alarm) == "5" {
+				pomo_duration = 300
 		}
 	}
 }

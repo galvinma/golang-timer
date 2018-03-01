@@ -41,6 +41,9 @@
     function alarmSub() {
       $('#start').addClass("disabled")
       $('#stop').removeClass("disabled")
+      $('#pomo').addClass("disabled")
+      $('#short').addClass("disabled")
+      $('#long').addClass("disabled")
 
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
@@ -52,7 +55,7 @@
       ws.onmessage = function (evt) {
         console.log(evt.data);
 
-        if(evt.data != "alarm") {
+        if(evt.data != "alarm" && evt.data != "25:00") {
            var ta = document.getElementById("ta");
            var ti = evt.data.replace(/['"]+/g, '');
            ta.value = ti
@@ -118,6 +121,10 @@
       $('#resume').addClass("disabled")
       $('#stop').addClass("disabled")
       $('#start').removeClass("disabled")
+
+      $('#pomo').removeClass("disabled")
+      $('#short').removeClass("disabled")
+      $('#long').removeClass("disabled")
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
       ws.onopen = function() {
@@ -126,16 +133,119 @@
       };
 
       var ta = document.getElementById("ta");
+
+      var active = document.getElementById("pomo");
+      if (active.className == "active") {
+          var time = "25:00"
+          ta.value = time;
+          $('#pomo').addClass("disabled")
+          console.log(ta.value)
+      }
+
+      var active = document.getElementById("long");
+      if (active.className == "active") {
+          var time = "10:00"
+          ta.value = time;
+          $('#long').addClass("disabled")
+          console.log(ta.value)
+      }
+
+      var active = document.getElementById("short");
+      if (active.className == "active") {
+          var time = "05:00"
+          ta.value = time;
+          $('#short').addClass("disabled")
+          console.log(ta.value)
+      }
+
+    }
+
+    </script>
+
+    <script type="text/javascript">
+    function pomoTime() {
+      $('#pomo').addClass("disabled")
+      $('#short').removeClass("disabled")
+      $('#long').removeClass("disabled")
+
+      $('#pomo').addClass("active")
+      $('#long').removeClass("active")
+      $('#short').removeClass("active")
+
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+      ws.onopen = function() {
+        var v = "25"
+        ws.send(v);
+      };
+
+      var ta = document.getElementById("ta");
       var ti = "25:00";
       ta.value = ti;
-      };
+
+    }
+
     </script>
+
+    <script type="text/javascript">
+    function shortTime() {
+      $('#short').addClass("disabled")
+      $('#pomo').removeClass("disabled")
+      $('#long').removeClass("disabled")
+
+      $('#short').addClass("active")
+      $('#long').removeClass("active")
+      $('#pomo').removeClass("active")
+
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+      ws.onopen = function() {
+        var v = "5"
+        ws.send(v);
+      };
+
+      var ta = document.getElementById("ta");
+      var ti = "05:00";
+      ta.value = ti;
+
+    };
+    </script>
+
+    <script type="text/javascript">
+    function longTime() {
+      $('#long').addClass("disabled")
+      $('#pomo').removeClass("disabled")
+      $('#short').removeClass("disabled")
+
+      $('#long').addClass("active")
+      $('#short').removeClass("active")
+      $('#pomo').removeClass("active")
+
+
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+      ws.onopen = function() {
+        var v = "10"
+        ws.send(v);
+      };
+
+      var ta = document.getElementById("ta");
+      var ti = "10:00";
+      ta.value = ti;
+    };
+    </script>
+
+
 
     <script>
      $(document).ready(function() {
         $('#stop').addClass("disabled")
         $('#reset').addClass("disabled")
         $('#resume').addClass("disabled")
+        $('#pomo').addClass("disabled")
+        $('#pomo').addClass("active")
+        $('#short').removeClass("disabled")
+        $('#long').removeClass("disabled")
       });
     </script>
 
@@ -147,7 +257,15 @@
     <div class="time-container">
       <textarea readonly="readonly" unselectable="on" id="ta"></textarea>
     </div>
-
+    <br>
+    <div class="alarm">
+      <input type="button" value="Pomodoro" onclick="pomoTime()" id="pomo">
+      <div class="space"></div>
+      <input type="button" value="Short Break" onclick="shortTime()" id="short">
+      <div class="space"></div>
+      <input type="button" value="Long Break" onclick="longTime()" id="long">
+    </div>
+    <br>
     <div class="alarm">
       <input type="button" value="Start" onclick="alarmSub()" id="start">
       <div class="space"></div>
