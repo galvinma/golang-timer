@@ -67,8 +67,8 @@
 
     <script type="text/javascript">
     function alarmStop() {
-      $('#start').removeClass("disabled")
       $('#reset').removeClass("disabled")
+      $('#resume').removeClass("disabled")
       $('#stop').addClass("disabled")
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
@@ -79,9 +79,43 @@
       };
     </script>
 
+
+    <script type="text/javascript">
+    function alarmResume() {
+      $('#resume').addClass("disabled")
+      $('#reset').addClass("disabled")
+      $('#stop').removeClass("disabled")
+
+      var ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+      ws.onopen = function() {
+        var v = "resume-timer"
+        ws.send(v);
+      };
+
+      ws.onmessage = function (evt) {
+        console.log(evt.data);
+
+        if(evt.data != "25:00") {
+           var ta = document.getElementById("ta");
+           var ti = evt.data.replace(/['"]+/g, '');
+           ta.value = ti
+         }
+
+        if(evt.data == "alarm") {
+           playTone()
+         }
+       };
+
+      };
+    </script>
+
     <script type="text/javascript">
     function alarmReset() {
       $('#reset').addClass("disabled")
+      $('#resume').addClass("disabled")
+      $('#stop').addClass("disabled")
+      $('#start').removeClass("disabled")
       var ws = new WebSocket("ws://127.0.0.1:5000/ws");
 
       ws.onopen = function() {
@@ -99,6 +133,7 @@
      $(document).ready(function() {
         $('#stop').addClass("disabled")
         $('#reset').addClass("disabled")
+        $('#resume').addClass("disabled")
       });
     </script>
 
@@ -115,6 +150,8 @@
       <input type="button" value="Start" onclick="alarmSub()" id="start">
       <div class="space"></div>
       <input type="button" value="Stop" onclick="alarmStop()" id="stop">
+      <div class="space"></div>
+      <input type="button" value="Resume" onclick="alarmResume()" id="resume">
       <div class="space"></div>
       <input type="button" value="Reset" onclick="alarmReset()" id="reset">
     </div>

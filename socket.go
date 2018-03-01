@@ -18,7 +18,9 @@ import (
 var alarmtrigger bool
 var alarmstop bool
 var countdown bool
+var savetimer bool
 var pomo_duration = 1500
+var saved_duration int
 // var short_break_duration = 300
 // var long_break_duration = 1500
 
@@ -52,27 +54,31 @@ func sendData(ws *websocket.Conn, m *sync.Mutex, t []byte) {
 	m.Unlock()
 }
 
+type Save struct {
+	Save float64
+}
 // Function sends the time left in session to the client
 // Set alarmtrigger to true if time runs out
 // Countdown from 25:00:00
 func clientSend(ws *websocket.Conn, m *sync.Mutex) {
 	start := time.Now()
 	for {
-		// If the alarm has not been triggerd and user has not sent stop...
-		if countdown == true {
 			time.Sleep(100 * time.Millisecond)
 			now := time.Duration(pomo_duration)*time.Second
 			difference := (now - time.Since(start)).String()
 			parse, _ := time.ParseDuration(difference)
 			seconds_left := math.Round(parse.Seconds())
+			saved_duration = int(seconds_left)
 			if seconds_left <= 0 {
 				alarmtrigger = true
 			}
 			formatted := timeLeft(seconds_left)
-			sendData(ws, m, []byte(formatted))
-		}	else {
-			break
-		}
+			log.Println(formatted)
+			if countdown == true {
+				sendData(ws, m, []byte(formatted))
+			}	else {
+				break
+			}
 	}
 }
 
@@ -90,7 +96,7 @@ func waitTimer(ws *websocket.Conn, m *sync.Mutex, timer *time.Timer) {
 					countdown = false;
 					break
 			// if alarm trigger is true, sound the alarm
-			} else if  alarmtrigger == true {
+			} else if alarmtrigger == true {
 					log.Println("Timer expired. Sounding the alarm.")
 					sendData(ws, m, []byte("alarm"))
 					break
@@ -114,7 +120,7 @@ func serverRecieve(ws *websocket.Conn, m *sync.Mutex) {
 			return
 		}
 		if string(alarm) == "start-timer" {
-				// Create a new timer. 1500s for pomodoro.
+				pomo_duration = 1500
 				pomo_dtime := time.Duration(pomo_duration) * time.Second
 				timer := time.NewTimer(pomo_dtime)
 				log.Println("Starting timer")
@@ -122,17 +128,26 @@ func serverRecieve(ws *websocket.Conn, m *sync.Mutex) {
 				alarmtrigger = false
 				alarmstop = false
 				countdown = true
-				// go triggerAlarm()
 				go clientSend(ws, m)
 				go waitTimer(ws, m, timer)
 		}
 		if string(alarm) == "stop-timer" {
 				alarmstop = true
+				savetimer = true
+		}
+		if string(alarm) == "resume-timer" {
+				alarmtrigger = false
+				alarmstop = false
+				countdown = true
+				log.Println("Resuming timer")
+				pomo_duration = saved_duration
+				pomo_dtime := time.Duration(pomo_duration) * time.Second
+				timer := time.NewTimer(pomo_dtime)
+				go clientSend(ws, m)
+				go waitTimer(ws, m, timer)
 		}
 		if string(alarm) == "reset-timer" {
 				alarmstop = true
-				// time.Sleep(100 * time.Millisecond)
-				// launchSend(ws, m)
 		}
 	}
 }
