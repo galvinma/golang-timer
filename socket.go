@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"net/http"
 	"time"
-	"math"
 	"sync"
 
+	"github.com/a-h/round"
 	"github.com/gorilla/websocket"
 )
 
@@ -67,7 +67,7 @@ func clientSend(ws *websocket.Conn, m *sync.Mutex) {
 			now := time.Duration(pomo_duration)*time.Second
 			difference := (now - time.Since(start)).String()
 			parse, _ := time.ParseDuration(difference)
-			seconds_left := math.Round(parse.Seconds())
+			seconds_left := round.AwayFromZero(parse.Seconds(), 0)
 			saved_duration = int(seconds_left)
 			if seconds_left <= 0 {
 				alarmtrigger = true
