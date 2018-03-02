@@ -5,7 +5,7 @@ ConditionPathExists= /root/go/src/github.com/galvinma/pomotime/
 [Service]
 Type=notify
 WorkingDirectory= /root/go/src/github.com/galvinma/pomotime/
-ExecStart= root/go/src/github.com/galvinma/pomotime/
+ExecStart= /root/go/src/github.com/galvinma/pomotime/main
 WatchdogSec=10s
 Restart=on-failure
 
