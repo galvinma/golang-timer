@@ -1,3 +1,3 @@
-# pomoti.me
+# pomotime
 
-Pomodoro timer written in golang.
+Pomodoro timer written in golang. See pomoti.me.

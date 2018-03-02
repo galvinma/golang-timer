@@ -146,6 +146,7 @@ func serverRecieve(ws *websocket.Conn, m *sync.Mutex) {
 				go waitTimer(ws, m, timer)
 		}
 		if string(alarm) == "reset-timer" {
+				log.Println("Reset timer")
 				alarmstop = true
 		}
 		if string(alarm) == "25" {

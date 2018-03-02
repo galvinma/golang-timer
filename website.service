@@ -1,0 +1,13 @@
+[Unit]
+Description= golang website as a service
+ConditionPathExists= /root/go/src/github.com/galvinma/pomotime/
+
+[Service]
+Type=notify
+WorkingDirectory= /root/go/src/github.com/galvinma/pomotime/
+ExecStart= root/go/src/github.com/galvinma/pomotime/
+WatchdogSec=10s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

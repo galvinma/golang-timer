@@ -3,6 +3,13 @@
 
 <head>
 
+
+<!-- meta tag -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif|Roboto|Cormorant+Garamond" rel="stylesheet">
+
 <!-- css -->
 <link rel="stylesheet" href="/static/css/theme.css">
 
@@ -10,16 +17,20 @@
 <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/static/js/theme.js"></script>
 
+<!--- favicon -->
+<link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
+
 </head>
 
 <body>
 
-    <title>pomotime</title>
+    <title>pomoti.me</title>
 
 
-    <div class="title-container">
+    <!-- <div class="title-container">
       <p>Pomodoro Timer</p>
-    </div>
+    </div> -->
+    <div class="vert-space"></div>
 
     <script type="text/javascript">
      function wsInit() {
@@ -130,7 +141,7 @@
       ws.onopen = function() {
         var v = "reset-timer"
         ws.send(v);
-      };
+
 
       var ta = document.getElementById("ta");
 
@@ -140,6 +151,8 @@
           ta.value = time;
           $('#pomo').addClass("disabled")
           console.log(ta.value)
+          var v = "25"
+          ws.send(v);
       }
 
       var active = document.getElementById("long");
@@ -148,6 +161,8 @@
           ta.value = time;
           $('#long').addClass("disabled")
           console.log(ta.value)
+          var v = "10"
+          ws.send(v);
       }
 
       var active = document.getElementById("short");
@@ -156,7 +171,11 @@
           ta.value = time;
           $('#short').addClass("disabled")
           console.log(ta.value)
+          var v = "5"
+          ws.send(v);
       }
+
+      };
 
     }
 
@@ -249,6 +268,14 @@
       });
     </script>
 
+    <script>
+    function showCrypto() {
+        document.getElementById("ether").style.visibility = "visible";
+        document.getElementById("btc").style.visibility = "visible";
+        document.getElementById("iota").style.visibility = "visible";
+
+    };
+  </script>
 
     <script type="text/javascript">
         wsInit()
@@ -274,6 +301,16 @@
       <input type="button" value="Resume" onclick="alarmResume()" id="resume">
       <div class="space"></div>
       <input type="button" value="Reset" onclick="alarmReset()" id="reset">
+    </div>
+    <br>
+    <div class="vert-space"></div>
+    <br>
+    <div class="footer">
+        <p>If you like pomoti.me, please consider <button onclick="showCrypto()" class="donate-button">donating</button>.</p>
+
+        <div id="ether">ether: 0x2Fd28424005a969Ac799953aF1e10E8A536DF8EE</div>
+        <div id="btc">btc: 1PUknv1RUpN1zmVQhFDnLrtmn8hSdU1VUB</div>
+        <div id="iota">iota: JCTAYOOEZVUWH9LZIWPTCKXFKEAPSOJB9WCHSZGFCFJTQICSFLWMJAQTLNJNEWRTNKPXBZKXADZQWKRODVHZBXP9ZC</div>
     </div>
 
 </body>

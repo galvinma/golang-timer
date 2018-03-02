@@ -4,8 +4,10 @@ import (
 	"net/http"
 	"net"
 	"log"
+	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/coreos/go-systemd/daemon"
 )
 
 func main() {
@@ -28,6 +30,23 @@ func main() {
 		log.Println(err)
 	}
 
+	// Tell systemd website operational.
+	daemon.SdNotify(false, "READY=1")
+
+	// Heartbeat
+	go func() {
+    interval, err := daemon.SdWatchdogEnabled(false)
+    if err != nil || interval == 0 {
+        return
+    }
+		for {
+	    _, err := http.Get("http://127.0.0.1:5000")
+	    if err == nil {
+	        daemon.SdNotify(false, "WATCHDOG=1")
+	    }
+	    time.Sleep(interval / 3)
+		}
+	}()
 	// Serve
   http.Serve(l, r)
 

@@ -5,7 +5,8 @@ html {
 }
 body{
     padding-bottom: 100px;
-
+    overflow:auto;
+    overflow-y: auto;
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
 }
@@ -26,7 +27,7 @@ input {
     resize: none;
 
     font-family: 'Roboto', sans-serif;
-    font-size: 48px;
+    font-size: 72px;
     max-width: 80%
 }
 .space {
@@ -83,8 +84,33 @@ input {
     vertical-align: top;
     width: 100px;
 }
+.vert-space{
+    height:150px;
+}
+
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+}
+.footer {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 25px;
+}
+.donate-button {
+    background:none!important;
+    color:inherit;
+    border:none;
+    padding:0!important;
+    font: inherit;
+    /*border is optional*/
+    border-bottom:1px solid #444;
+    cursor: pointer;
+}
+#btc, #ether, #iota {
+    visibility: hidden;
+
 }
