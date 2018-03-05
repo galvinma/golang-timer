@@ -35,7 +35,7 @@
     <script type="text/javascript">
      function wsInit() {
 
-        var ws = new WebSocket("wss://" + document.location.host + "/ws");
+        var ws = new WebSocket("ws://" + document.location.host + "/ws");
         ws.onmessage = function (evt) {
           console.log(evt.data);
           if(evt.data != "alarm") {
@@ -55,7 +55,7 @@
       $('#short').addClass("disabled")
       $('#long').addClass("disabled")
 
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "start-timer"
         ws.send(v);
@@ -83,7 +83,7 @@
       $('#reset').removeClass("disabled")
       $('#resume').removeClass("disabled")
       $('#stop').addClass("disabled")
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "stop-timer"
         ws.send(v);
@@ -98,7 +98,7 @@
       $('#reset').addClass("disabled")
       $('#stop').removeClass("disabled")
 
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "resume-timer"
         ws.send(v);
@@ -132,7 +132,7 @@
       $('#pomo').removeClass("disabled")
       $('#short').removeClass("disabled")
       $('#long').removeClass("disabled")
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "reset-timer"
         ws.send(v);
@@ -186,7 +186,7 @@
       $('#long').removeClass("active")
       $('#short').removeClass("active")
 
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "25"
         ws.send(v);
@@ -210,7 +210,7 @@
       $('#long').removeClass("active")
       $('#pomo').removeClass("active")
 
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "5"
         ws.send(v);
@@ -234,7 +234,7 @@
       $('#pomo').removeClass("active")
 
 
-      var ws = new WebSocket("wss://" + document.location.host + "/ws");
+      var ws = new WebSocket("ws://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "10"
         ws.send(v);
@@ -295,15 +295,6 @@
       <input type="button" value="Reset" onclick="alarmReset()" id="reset">
     </div>
     <br>
-    <div class="vert-space"></div>
-    <br>
-    <div class="footer">
-        <p>If you like pomoti.me, please consider <button onclick="showCrypto()" class="donate-button">donating</button>.</p>
-
-        <div id="ether">ether: 0x2Fd28424005a969Ac799953aF1e10E8A536DF8EE</div>
-        <div id="btc">btc: 1PUknv1RUpN1zmVQhFDnLrtmn8hSdU1VUB</div>
-        <div id="iota">iota: JCTAYOOEZVUWH9LZIWPTCKXFKEAPSOJB9WCHSZGFCFJTQICSFLWMJAQTLNJNEWRTNKPXBZKXADZQWKRODVHZBXP9ZC</div>
-    </div>
 
 </body>
 
