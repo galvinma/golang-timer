@@ -35,8 +35,7 @@
     <script type="text/javascript">
      function wsInit() {
 
-        var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+        var ws = new WebSocket("wss://" + document.location.host + "/ws");
         ws.onmessage = function (evt) {
           console.log(evt.data);
           if(evt.data != "alarm") {
@@ -56,8 +55,7 @@
       $('#short').addClass("disabled")
       $('#long').addClass("disabled")
 
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "start-timer"
         ws.send(v);
@@ -85,8 +83,7 @@
       $('#reset').removeClass("disabled")
       $('#resume').removeClass("disabled")
       $('#stop').addClass("disabled")
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "stop-timer"
         ws.send(v);
@@ -101,8 +98,7 @@
       $('#reset').addClass("disabled")
       $('#stop').removeClass("disabled")
 
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "resume-timer"
         ws.send(v);
@@ -136,8 +132,7 @@
       $('#pomo').removeClass("disabled")
       $('#short').removeClass("disabled")
       $('#long').removeClass("disabled")
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "reset-timer"
         ws.send(v);
@@ -191,8 +186,7 @@
       $('#long').removeClass("active")
       $('#short').removeClass("active")
 
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "25"
         ws.send(v);
@@ -216,8 +210,7 @@
       $('#long').removeClass("active")
       $('#pomo').removeClass("active")
 
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "5"
         ws.send(v);
@@ -241,8 +234,7 @@
       $('#pomo').removeClass("active")
 
 
-      var ws = new WebSocket("ws://" + document.location.host + "/ws");
-
+      var ws = new WebSocket("wss://" + document.location.host + "/ws");
       ws.onopen = function() {
         var v = "10"
         ws.send(v);
