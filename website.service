@@ -1,5 +1,5 @@
 [Unit]
-Description= golang website as a service
+Description= pomotime as a service
 ConditionPathExists= /root/go/src/github.com/galvinma/pomotime/
 
 [Service]
